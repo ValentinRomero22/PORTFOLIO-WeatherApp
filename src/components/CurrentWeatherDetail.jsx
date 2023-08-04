@@ -1,5 +1,9 @@
-export const CurrentWeatherDetail = () => {
+export const CurrentWeatherDetail = ({ currentWeather }) => {
     return (
-        <p> Current Weather Detail</p>
+        <section>
+            <article>
+                <p>DATOS DEL TIEMPO ACTUAL...</p>
+            </article>
+        </section>
     )
 }

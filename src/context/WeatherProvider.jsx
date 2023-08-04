@@ -5,7 +5,8 @@ import { API_KEY, BASE_URL } from "../helpers/apiConfig"
 export const WeatherProvider = ({ children }) => {
     const [currentWeather, setCurrentWeather] = useState({})
     const [forecast, setForecast] = useState({})
-    const [loading, setLoading] = useState(true)
+    const [loadingCurrentWeather, setLoadingCurrentWeahter] = useState(true)
+    const [loadingForecast, setLoadingForecast] = useState(true)
     const [error, setError] = useState(null)
 
     const getCurrentWeather = () => {
@@ -13,6 +14,7 @@ export const WeatherProvider = ({ children }) => {
             .then((res) => res.json())
             .then((data) => {
                 setCurrentWeather(data)
+                setLoadingCurrentWeahter(false)
             })
             .catch((error) => setError(error))
     }
@@ -22,6 +24,7 @@ export const WeatherProvider = ({ children }) => {
             .then((res) => res.json())
             .then((data) => {
                 setForecast(data)
+                setLoadingForecast(false)
             })
             .catch((error) => setError(error))
     }
@@ -29,8 +32,6 @@ export const WeatherProvider = ({ children }) => {
     useEffect(() => {
         getCurrentWeather()
         getNextDaysForecast()
-
-        setLoading(false)
     }, [])
 
     return (
@@ -38,7 +39,8 @@ export const WeatherProvider = ({ children }) => {
             value={{
                 currentWeather,
                 forecast,
-                loading,
+                loadingCurrentWeather,
+                loadingForecast,
                 error
             }}>
             {children}

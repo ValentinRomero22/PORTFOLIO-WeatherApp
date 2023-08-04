@@ -5,13 +5,15 @@ import { CurrentWeatherDetail } from "./CurrentWeatherDetail"
 import { ForecastWeather } from "./ForecastWeather"
 
 export const WeatherContainer = () => {
-    const { currentWeather, forecast, loading, error } = useContext(WeatherContext)
+    const { currentWeather, forecast, loadingCurrentWeather, loadingForecast, error } = useContext(WeatherContext)
+
+    if (loadingCurrentWeather || loadingForecast) return (<p>Cargando...</p>)
 
     return (
         <div className="mainWeatherCotainer">
             <MainWeatherAside currentWeather={currentWeather} />
-            <CurrentWeatherDetail />
-            <ForecastWeather />
+            <CurrentWeatherDetail currentWeather={currentWeather} />
+            <ForecastWeather forecast={forecast} />
         </div>
     )
 }
